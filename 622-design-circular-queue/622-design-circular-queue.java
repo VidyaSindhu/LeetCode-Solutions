@@ -22,7 +22,7 @@ class MyCircularQueue {
     }
     
     public boolean deQueue() {
-        // System.out.println(front + "  " + rear);
+    
         if(front == -1 && rear == -1) return false;
         else if(front > rear) return false;
         front++;
