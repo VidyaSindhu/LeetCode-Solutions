@@ -1,6 +1,6 @@
 class Solution {
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
-        Arrays.sort(arr);
+        List<Integer> res = new ArrayList();
         
         int low = 0, high = arr.length-1;
         
@@ -17,7 +17,6 @@ class Solution {
         int pivot = high;
         low = pivot;
         high = pivot + 1;
-        List<Integer> res = new ArrayList();
         while((low >= 0 || high < arr.length) && k > 0){
             if(low >= 0 && high < arr.length){
                 int left = Math.abs(arr[low] - x);
