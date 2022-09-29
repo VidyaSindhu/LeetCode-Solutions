@@ -1,7 +1,6 @@
 class Solution {
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
         List<Integer> res = new ArrayList();
-        
         int low = 0, high = arr.length-k-1;
         
         while(low <= high){
