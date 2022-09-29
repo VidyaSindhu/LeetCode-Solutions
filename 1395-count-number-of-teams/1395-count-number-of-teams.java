@@ -2,38 +2,29 @@ class Solution {
     public int numTeams(int[] rating) {
         int ans = 0;
         int n = rating.length;
-        int[] smallerRatingLeft = new int[n];
-        for(int i = 0; i < n-1; i++){
+        
+        for(int i = 0; i < n; i++){
+            int leftSmaller = 0, rightSmaller = 0;
+            int leftLarger = 0, rightLarger = 0;
             for(int j = i+1; j < n; j++){
                 if(rating[i] < rating[j]){
-                    smallerRatingLeft[i]++;
+                    rightLarger++;
+                }
+                if(rating[i] > rating[j]){
+                    rightSmaller++;
                 }
             }
-        }
-        
-        int[] smallerRatingRight = new int[n];
-        for(int i = n-1; i >= 1; i--){
-            for(int j = i-1; j >= 0; j--){
+            
+            for(int j = 0; j < i; j++){
                 if(rating[i] < rating[j]){
-                    smallerRatingRight[i]++;
+                    leftLarger++;
+                }
+                if(rating[i] > rating[j]){
+                    leftSmaller++;
                 }
             }
-        }
-        
-        for(int i = 0; i < n-1; i++){
-            for(int j = i+1; j < n; j++){
-                if(rating[i] < rating[j]){
-                    ans += smallerRatingLeft[j];
-                }
-            }
-        }
-        
-        for(int i = n-1; i >= 1; i--){
-            for(int j = i-1; j >= 0; j--){
-                if(rating[i] < rating[j]){
-                    ans += smallerRatingRight[j];
-                }
-            }
+            
+            ans += leftLarger * rightSmaller + leftSmaller * rightLarger;
         }
         
         return ans;
