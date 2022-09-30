@@ -20,7 +20,6 @@ class Solution {
         for(int i = peakIndex; i < n; i++){
             if(nums[i] > nums[peakIndex-1] && nums[peakIndex] > nums[i]){
                 specialCase = i;
-                // break;
             }
         }
         swap(nums, peakIndex-1, specialCase);
