@@ -14,8 +14,7 @@ class Solution {
             ans = 0;
         }
         else if(s.charAt(pos) == '1'){
-            ans += numDecodings(s, pos+1);
-            ans += numDecodings(s, pos + 2);
+            ans += numDecodings(s, pos+1) + numDecodings(s, pos + 2);
         }
         else if(s.charAt(pos) == '2'){
             ans += numDecodings(s, pos + 1);
