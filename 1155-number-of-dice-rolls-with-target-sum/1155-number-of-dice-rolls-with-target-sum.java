@@ -7,8 +7,7 @@ class Solution {
     
     int helper(int n, int k, int target, Integer[][] dp){
         if(n == 1) {
-            if(target <= 0) return 0;
-            if(target <= k) return 1;
+            if(target > 0 && target <= k) return 1;
         }
         if(n <= 0) return 0;
         if(target <= 0) return 0;
