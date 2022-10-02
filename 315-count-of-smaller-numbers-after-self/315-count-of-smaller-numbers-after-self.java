@@ -2,7 +2,7 @@ class Solution {
     public List<Integer> countSmaller(int[] nums) {
         int n = nums.length;
         List<Pair<Integer, Integer>> arr = new ArrayList();
-        List<Integer> res = new ArrayList<Integer>();
+        List<Integer> res = new ArrayList<Integer>(n);
         for(int i = 0; i < n; i++){
             Pair<Integer, Integer> pair = new Pair(nums[i], i);
             arr.add(pair);
