@@ -31,14 +31,4 @@ class Solution {
         
         return root;
     }
-    
-//     void addOneRow(TreeNode root, int val, int depth){
-//         if(depth == 2){
-//             root.left = new TreeNode(val, root.left, null);
-//             root.right = new TreeNode(val, root.right, null);
-//             return;
-//         }
-        
-//         addOneRow(root.left, val, depth-1)
-//     }
 }
