@@ -14,7 +14,7 @@ class CountIntervals {
         else{
             int start = left;
             int end = right;
-            while(!(map.floorKey(end) == null || map.get(map.floorKey(right)) < start)){
+            while(!(map.floorKey(end) == null || map.get(map.floorKey(end)) < start)){
                 int l = map.floorKey(right);
                 int r = map.get(l);
                 
