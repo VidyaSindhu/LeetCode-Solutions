@@ -26,7 +26,7 @@ class Solution {
             parents[i] = i;
             lastNum[i] = vals[i];
         }
-        // System.out.println(valIdx);
+        
         int ans = 0;
         while(!valIdx.isEmpty()){
             int node = valIdx.poll();
