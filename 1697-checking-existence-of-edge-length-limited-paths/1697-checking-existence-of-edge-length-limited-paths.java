@@ -30,7 +30,9 @@ class Solution {
             int p1 = find(queries[idx][0], parents);
             int p2 = find(queries[idx][1], parents);
             
-            res[idx] = p1 == p2 && lastEdgeCost < queries[idx][2];
+            if(p1 == p2 && lastEdgeCost < queries[idx][2]){
+                res[idx] = true;
+            }
         }
         
         
