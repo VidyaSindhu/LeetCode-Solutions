@@ -18,15 +18,7 @@ class Solution {
         int curr = -11;
         for(int i = 0; i < nums.length; i++){
             if(!taken[i]){
-                if(curr == -11){
-                    curr = nums[i];
-                    list.add(nums[i]);
-                    taken[i] = true;
-                    helper(nums, list, taken);
-                    list.remove(list.size()-1);
-                    taken[i] = false;
-                }
-                else if(curr != nums[i]){
+                if(curr != nums[i]){
                     curr = nums[i];
                     list.add(nums[i]);
                     taken[i] = true;
