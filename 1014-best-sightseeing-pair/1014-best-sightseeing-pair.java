@@ -4,6 +4,7 @@ class Solution {
         
         int[] maxValueMinusI = new int[n];
         maxValueMinusI[n-1] = values[n-1] - (n-1);
+        
         for(int i = 1; i < n; i++){
             maxValueMinusI[n-i-1] = Integer.max(maxValueMinusI[n-i], values[n-i-1] - (n-i-1));
         }
