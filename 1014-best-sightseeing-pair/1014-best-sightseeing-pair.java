@@ -1,8 +1,6 @@
 class Solution {
     public int maxScoreSightseeingPair(int[] values) {
         int n = values.length;
-        int[] valuesPlusI = new int[n];
-        valuesPlusI[0] = values[0];
         
         int[] maxValueMinusI = new int[n];
         maxValueMinusI[n-1] = values[n-1] - (n-1);
