@@ -2,17 +2,13 @@ class Solution {
     public String breakPalindrome(String palindrome) {
         char[] a = palindrome.toCharArray();
         if(a.length == 1) return "";
-        boolean done = false;
         for(int i = 0; i < a.length/2; i++){
             if(a[i] != 'a'){
-                done = true;
                 a[i] = 'a';
-                break;
+                return new String(a);
             }
         }
-        if(!done) {
-            a[a.length-1] = (char)(a[a.length-1] + 1);
-        }
+        a[a.length-1] = 'b';
         return new String(a);
     }
 }
