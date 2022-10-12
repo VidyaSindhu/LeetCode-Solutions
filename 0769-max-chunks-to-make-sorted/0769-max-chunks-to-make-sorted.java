@@ -6,7 +6,6 @@ class Solution {
             max = Integer.max(max, arr[i]);
             if(max == i){
                 ans++;
-                // max = -1;
             }
         }
         
