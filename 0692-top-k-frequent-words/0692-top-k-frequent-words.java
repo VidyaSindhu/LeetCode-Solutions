@@ -3,17 +3,15 @@ class Solution {
         Map<String, Integer> map = new HashMap();
         TreeSet<String> set = new TreeSet<>((a, b) ->{
             if(!map.get(a).equals(map.get(b))) return map.get(b) - map.get(a);
-            // System.out.println(a + " " + b + " " + compare(a, b));
             return compare(a, b);
         });
         for(String word: words){
             map.put(word, map.getOrDefault(word, 0) + 1);
-            // set.add(word);
         }
         for(String key: map.keySet()){
             set.add(key);
         }
-        // System.out.println(set);
+        
         List<String> res = new ArrayList();
         int i = 0;
         for(String word: set){
@@ -21,7 +19,7 @@ class Solution {
             res.add(word);
             i++;
         }
-        // Collections.sort(res);
+        
         return res;
     }
     
