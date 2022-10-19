@@ -1,9 +1,6 @@
 class Solution {
     public int compress(char[] chars) {
         HashMap<Character, Integer> map = new HashMap();
-        // for(char c: chars){
-        //     freq[c-'a']++;
-        // }
         
         int res = 0;
         char lastChar = chars[0];
@@ -12,7 +9,6 @@ class Solution {
                 int freq = map.get(lastChar);
                 if(freq > 0){
                     StringBuilder s = countDigits(freq);
-                    // System.out.println(s);
                     chars[res++] = lastChar;
                     for(int j = 0; res < chars.length && freq > 1 && j < s.length(); j++){
                         chars[res++]= s.charAt(j);
