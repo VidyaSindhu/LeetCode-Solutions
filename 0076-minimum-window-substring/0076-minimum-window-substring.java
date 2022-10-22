@@ -10,7 +10,6 @@ class Solution {
         String res = "";
         int best = Integer.MAX_VALUE;
         while(right < s.length()){
-            
             sMap.put(s.charAt(right), sMap.getOrDefault(s.charAt(right), 0) + 1);
             
             while(haveChars(targetMap, sMap)){
