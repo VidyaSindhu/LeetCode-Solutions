@@ -1,23 +1,22 @@
 class Solution {
     public String minWindow(String s, String t) {
-        HashMap<Character, Integer> targetMap = new HashMap();
-        HashMap<Character, Integer> sMap = new HashMap();
+        int[] tFreq = new int[58];
+        int[] sFreq = new int[58];
         
         for(char c : t.toCharArray()){
-            targetMap.put(c, targetMap.getOrDefault(c, 0) + 1);
+            tFreq[c-'A']++;
         }
         int left = 0, right = 0;
         String res = "";
         int best = Integer.MAX_VALUE;
         while(right < s.length()){
-            sMap.put(s.charAt(right), sMap.getOrDefault(s.charAt(right), 0) + 1);
-            
-            while(haveChars(targetMap, sMap)){
+            sFreq[s.charAt(right)-'A']++;
+            while(haveChars(tFreq, sFreq)){
                 if(best > right - left + 1){
                     best = right - left + 1;
                     res = s.substring(left, right+1);
                 }
-                sMap.put(s.charAt(left), sMap.get(s.charAt(left)) - 1);
+                sFreq[s.charAt(left)-'A']--;
                 left++;
             }
             right++;
@@ -27,9 +26,9 @@ class Solution {
         return res;
     }
     
-    boolean haveChars(HashMap<Character, Integer> t, HashMap<Character, Integer> s){
-        for(char c : t.keySet()){
-            if(!s.containsKey(c) || s.get(c) < t.get(c)) return false;
+    boolean haveChars(int[] t, int[] s){
+        for(int i = 0; i < t.length; i++){
+            if(s[i] < t[i]) return false;
         }
         
         return true;
