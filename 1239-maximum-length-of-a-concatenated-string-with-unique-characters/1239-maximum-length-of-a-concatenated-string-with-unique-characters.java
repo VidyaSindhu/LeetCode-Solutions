@@ -1,54 +1,29 @@
 class Solution {
     public int maxLength(List<String> arr) {
-        int n = arr.size();
-        int totalComb = 1 << (n+1);
-        totalComb--;
-        
+        List<Integer> combinations = new ArrayList();
+        combinations.add(0);
         int maxLength = 0;
         
-        boolean[] charFreq = new boolean[26];
-        for(int i = 0; i < totalComb; i++){
-            Arrays.fill(charFreq, false);
-            int len = 0;
+        for(String s: arr){
+            int curr = 0;
             boolean found = true;
-            for(int k = 0; k < arr.size(); k++){
-                if(((i >> k) & 1) == 0) continue;
-                
-                int[] chars = getCharFreq(arr.get(k));
-
-                if(!isValid(charFreq, chars)){
+            for(char c : s.toCharArray()){
+                if(((curr >> (c-'a')) & 1) == 1){
                     found = false;
                     break;
                 }
-
-                for(int j = 0; j < 26; j++){
-                    charFreq[j] |= chars[j] > 0;
-                }
-                len += arr.get(k).length();
+                curr |= (1 << (c-'a'));
             }
-            if(found){
-                maxLength = Integer.max(maxLength, len);
+            
+            if(!found) continue;
+            
+            for(int i = 0; i < combinations.size(); i++){
+                if((curr & combinations.get(i)) > 0) continue;
+                combinations.add(curr | combinations.get(i));
+                maxLength = Integer.max(maxLength, Integer.bitCount(curr | combinations.get(i)));
             }
         }
         
         return maxLength;
-    }
-    
-    boolean isValid(boolean[] original, int[] chars){
-        for(int i = 0; i < 26; i++){
-            if(chars[i] > 0 && original[i]) return false;
-            else if(chars[i] > 1) return false;
-        }
-        
-        return true;
-    }
-    
-    int[] getCharFreq(String s){
-        int[] res = new int[26];
-        for(char c : s.toCharArray()){
-            res[c-'a']++;
-        }
-        
-        return res;
     }
 }
