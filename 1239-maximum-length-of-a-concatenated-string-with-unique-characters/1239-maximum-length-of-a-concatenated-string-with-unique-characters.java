@@ -6,24 +6,25 @@ class Solution {
         
         int maxLength = 0;
         
-        int[] charFreq = new int[26];
+        boolean[] charFreq = new boolean[26];
         for(int i = 0; i < totalComb; i++){
-            Arrays.fill(charFreq, 0);
+            Arrays.fill(charFreq, false);
             int len = 0;
             boolean found = true;
             for(int k = 0; k < arr.size(); k++){
-                if(((i >> k) & 1) == 1){
-                    int[] chars = getCharFreq(arr.get(k));
-                    if(!isValid(charFreq, chars)){
-                        found = false;
-                        break;
-                    }
-                    
-                    for(int j = 0; j < 26; j++){
-                        charFreq[j] += chars[j];
-                    }
-                    len += arr.get(k).length();
+                if(((i >> k) & 1) == 0) continue;
+                
+                int[] chars = getCharFreq(arr.get(k));
+
+                if(!isValid(charFreq, chars)){
+                    found = false;
+                    break;
                 }
+
+                for(int j = 0; j < 26; j++){
+                    charFreq[j] |= chars[j] > 0;
+                }
+                len += arr.get(k).length();
             }
             if(found){
                 maxLength = Integer.max(maxLength, len);
@@ -33,9 +34,9 @@ class Solution {
         return maxLength;
     }
     
-    boolean isValid(int[] original, int[] chars){
+    boolean isValid(boolean[] original, int[] chars){
         for(int i = 0; i < 26; i++){
-            if(chars[i] > 0 && original[i] > 0) return false;
+            if(chars[i] > 0 && original[i]) return false;
             else if(chars[i] > 1) return false;
         }
         
