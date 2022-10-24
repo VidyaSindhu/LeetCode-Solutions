@@ -6,8 +6,9 @@ class Solution {
         
         int maxLength = 0;
         
+        int[] charFreq = new int[26];
         for(int i = 0; i < totalComb; i++){
-            int[] charFreq = new int[26];
+            Arrays.fill(charFreq, 0);
             int len = 0;
             boolean found = true;
             for(int k = 0; k < arr.size(); k++){
