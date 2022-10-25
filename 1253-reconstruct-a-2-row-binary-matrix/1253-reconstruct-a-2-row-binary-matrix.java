@@ -6,14 +6,14 @@ class Solution {
         
         int inUpper = upper;
         int inLower = lower;
-        int totalCol = 0;
+        
         for(int sum: colsum){
             if(sum == 2){
                 res.get(0).add(1);
                 res.get(1).add(1);
                 upper--;
                 lower--;
-                // totalCol += sum
+                
             }
             else {
                 res.get(0).add(0);
