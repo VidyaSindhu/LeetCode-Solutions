@@ -1,5 +1,4 @@
 class Solution {
-    int[][] dirs = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
     public int largestOverlap(int[][] img1, int[][] img2) {
         int n = img1.length;
         int max = 0;
@@ -9,7 +8,6 @@ class Solution {
                     for(int img2J = 0; img2J < n; img2J++){
                         int cur = dfs(img1, img2, img1I, img1J, img2I, img2J);
                         max = Integer.max(max, cur);
-                        // System.out.println(cur + " " + img1I + " " + img1J + "  " + img2I + "  " + img2J);
                     }
                 }
             }
@@ -25,7 +23,6 @@ class Solution {
                 if(img1[x1][j1] == 1 && img1[x1][j1] == img2[x2][j2]){
                     count++;
                 }
-                // System.out.println(count + " " + x1 + " " + y1 + "  " + x2 + "  " + y2);
             }
             
         }
