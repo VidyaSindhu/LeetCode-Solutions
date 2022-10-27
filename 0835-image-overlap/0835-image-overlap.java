@@ -1,31 +1,33 @@
 class Solution {
     public int largestOverlap(int[][] img1, int[][] img2) {
-        int n = img1.length;
-        int max = 0;
-        for(int img1I = 0; img1I < n; img1I++){
-            for(int img1J = 0; img1J < n; img1J++){
-                for(int img2I = 0; img2I < n; img2I++){
-                    for(int img2J = 0; img2J < n; img2J++){
-                        int cur = dfs(img1, img2, img1I, img1J, img2I, img2J);
-                        max = Integer.max(max, cur);
-                    }
-                }
+        int maxOverlaps = 0;
+        for(int xShift = 0; xShift < img1.length; xShift++){
+            for(int yShift = 0; yShift < img2.length; yShift++){
+                maxOverlaps = Integer.max(maxOverlaps, shiftAndCount(img1, img2, xShift, yShift));
+                maxOverlaps = Integer.max(maxOverlaps, shiftAndCount(img2, img1, xShift, yShift));
             }
         }
         
-        return max;
+        return maxOverlaps;
     }
     
-    int dfs(int[][] img1, int[][] img2, int x1, int y1, int x2, int y2){
-        int count = 0;
-        for(; x1 < img1.length && x2 < img2.length; x1++, x2++){
-            for(int j1 = y1, j2 = y2; j1 < img1.length && j2 < img2.length; j1++, j2++){
-                if(img1[x1][j1] == 1 && img1[x1][j1] == img2[x2][j2]){
-                    count++;
+    int shiftAndCount(int[][] M, int[][] R, int xShift, int yShift){
+        int leftShiftOverLaps = 0, rightShiftOverLaps = 0;
+        int rRow = 0;
+        for(int mRow = yShift; mRow < M.length; mRow++){
+            int rCol = 0;
+            for(int mCol = xShift; mCol < M.length; mCol++){
+                if(M[mRow][mCol] == 1 && M[mRow][mCol] == R[rRow][rCol]){
+                    rightShiftOverLaps++;
                 }
+                if(M[mRow][rCol] == 1 && M[mRow][rCol] == R[rRow][mCol]){
+                    leftShiftOverLaps++;
+                }
+                rCol++;
             }
-            
+            rRow++;
         }
-        return count;
+        
+        return Integer.max(leftShiftOverLaps, rightShiftOverLaps);
     }
 }
