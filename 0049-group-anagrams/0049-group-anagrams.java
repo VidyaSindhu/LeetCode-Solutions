@@ -8,12 +8,17 @@ class Solution {
                 map.get(freq).add(word);
             }
             else{
-                map.put(freq, new LinkedList());
+                map.put(freq, new ArrayList());
                 map.get(freq).add(word);
             }
         }
         
-        return new LinkedList(map.values());
+        List<List<String>> res = new ArrayList();
+        for(List<String> l : map.values()){
+            res.add(l);
+        }
+        
+        return res;
     }
     
     String getCharFreq(String s){
