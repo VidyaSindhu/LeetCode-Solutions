@@ -13,12 +13,7 @@ class Solution {
             }
         }
         
-        List<List<String>> res = new ArrayList();
-        for(List<String> l : map.values()){
-            res.add(l);
-        }
-        
-        return res;
+        return new ArrayList(map.values());
     }
     
     String getCharFreq(String s){
@@ -31,7 +26,7 @@ class Solution {
             sb.append(num);
             sb.append(" ");
         }
-        // System.out.println(sb);
+        
         return sb.toString();
     }
 }
