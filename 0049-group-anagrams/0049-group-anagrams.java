@@ -13,7 +13,7 @@ class Solution {
             }
         }
         
-        return new ArrayList(map.values());
+        return new LinkedList(map.values());
     }
     
     String getCharFreq(String s){
