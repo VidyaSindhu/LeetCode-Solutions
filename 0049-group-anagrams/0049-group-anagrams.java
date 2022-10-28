@@ -8,7 +8,7 @@ class Solution {
                 map.get(freq).add(word);
             }
             else{
-                map.put(freq, new ArrayList());
+                map.put(freq, new LinkedList());
                 map.get(freq).add(word);
             }
         }
