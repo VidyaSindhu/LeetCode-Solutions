@@ -7,7 +7,7 @@ class Solution {
         for(int num : nums){
             if(first < num) return true;
             else if(second < num){
-                first = num;
+                first = Integer.min(num, first);
             }
             else second = Integer.min(second, num);
         }
