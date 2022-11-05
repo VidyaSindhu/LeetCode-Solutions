@@ -1,26 +1,36 @@
 class Solution {
     public int longestPalindrome(String[] words) {
-        final int alphabetSize = 26;
-        int[][] count = new int[alphabetSize][alphabetSize];
-        for (String word : words) {
-            count[word.charAt(0) - 'a'][word.charAt(1) - 'a']++;
+        HashMap<String, Integer> map = new HashMap();
+        
+        for(String word: words){
+            map.put(word, map.getOrDefault(word, 0) + 1);
         }
-        int answer = 0;
-        boolean central = false;
-        for (int i = 0; i < alphabetSize; i++) {
-            if (count[i][i] % 2 == 0) {
-                answer += count[i][i];
-            } else {
-                answer += count[i][i] - 1;
-                central = true;
+        
+        int ans = 0;
+        
+        boolean found = false;
+        Set<String> reverse = new HashSet();
+        // System.out.println(map);
+        for(String word: map.keySet()){
+            if(word.charAt(0) == word.charAt(1)){
+                if(map.get(word) > 1){
+                    int count = map.get(word)/2;
+                    // System.out.println(count);
+                    ans += count * 4;
+                    if(map.get(word) % 2 == 1) found = true;
+                }
+                else found = true;
             }
-            for (int j = i + 1; j < alphabetSize; j++) {
-            	answer += 2 * Math.min(count[i][j], count[j][i]);
+            else if(map.containsKey(getReverse(word))){
+                ans += 2 * Integer.min(map.get(word), map.get(getReverse(word)));
             }
         }
-        if (central) {
-            answer++;
-        }
-        return 2 * answer;
+        
+        return found ? ans + 2 : ans;
+    }
+    
+    
+    String getReverse(String word){
+        return new StringBuilder(word).reverse().toString();
     }
 }
