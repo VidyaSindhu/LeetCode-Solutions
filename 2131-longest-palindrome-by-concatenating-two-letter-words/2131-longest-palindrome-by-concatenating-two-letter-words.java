@@ -10,12 +10,11 @@ class Solution {
         
         boolean found = false;
         Set<String> reverse = new HashSet();
-        // System.out.println(map);
+        
         for(String word: map.keySet()){
             if(word.charAt(0) == word.charAt(1)){
                 if(map.get(word) > 1){
                     int count = map.get(word)/2;
-                    // System.out.println(count);
                     ans += count * 4;
                     if(map.get(word) % 2 == 1) found = true;
                 }
