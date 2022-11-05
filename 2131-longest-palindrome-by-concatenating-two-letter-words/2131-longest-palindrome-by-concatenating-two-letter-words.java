@@ -9,7 +9,6 @@ class Solution {
         int ans = 0;
         
         boolean found = false;
-        Set<String> reverse = new HashSet();
         
         for(String word: map.keySet()){
             if(word.charAt(0) == word.charAt(1)){
