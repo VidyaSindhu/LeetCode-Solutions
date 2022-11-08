@@ -18,8 +18,9 @@ class Solution {
             long waste = 0;
             for(int i = 0; i < box.length; i++){
                 int ceil = ceil(packages, box[i]);
+                long len = 0;
                 if(ceil != -1){
-                    long len = ceil - last + 1;
+                    len = ceil - last + 1;
                     waste += len * box[i];
                     last = ceil+1;
                     if(ceil >= packages.length) break;
