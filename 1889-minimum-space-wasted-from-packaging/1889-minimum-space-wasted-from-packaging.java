@@ -9,13 +9,9 @@ class Solution {
             totalSum += packages[i];
         }
         
-        for(int[] box: boxes){
-            Arrays.sort(box);
-        }
-        
         long ans = Long.MAX_VALUE;
         for(int[] box: boxes){
-            
+            Arrays.sort(box);
             if(box[box.length-1] < packages[n-1]) continue;
             int last = 0;
             
