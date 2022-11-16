@@ -24,7 +24,6 @@ class Solution {
             }
             else if(Math.abs(target - leftSum - rightSum) == diff){
                 ans = Integer.min(i, ans);
-                // System.out.println(diff + "  " + i);
             }
         }
 
