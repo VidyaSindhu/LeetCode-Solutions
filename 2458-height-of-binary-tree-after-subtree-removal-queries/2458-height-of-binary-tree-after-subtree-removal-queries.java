@@ -14,38 +14,47 @@
  * }
  */
 class Solution {
-    int maxHeight;
+    int N = 100001;
+    int time = 1;
+    int[] start;
+    int[] end;
+    int[] tree;
+    int n = 0;
     public int[] treeQueries(TreeNode root, int[] queries) {
-        int[] preOrderHeight = new int[100001];
-        int[] preOrderMirrorHeight = new int[100001];
+        start = new int[N];
+        end = new int[N];
+        tree = new int[2 * N + 1];
         
-        maxHeight = 0;
-        preOrder(root, 0, preOrderHeight);
+        dfs(root, 0);
         
-        maxHeight = 0;
-        preOrderMirror(root, 0, preOrderMirrorHeight);
+        int[] prefixMax = new int[2 * N + 1];
+        for(int i = 1; i < tree.length; i++){
+            prefixMax[i] = Integer.max(prefixMax[i-1], tree[i]);
+        }
+        
+        int[] suffixMax = new int[tree.length];
+        suffixMax[suffixMax.length-1] = tree[tree.length-1];
+        for(int i = tree.length-2; i >= 0; i--){
+            suffixMax[i] = Integer.max(suffixMax[i+1], tree[i]);
+        }
         
         int[] res = new int[queries.length];
-        for(int i = 0; i < queries.length; i++){
-            res[i] = Integer.max(preOrderHeight[queries[i]], preOrderMirrorHeight[queries[i]]);
+        for(int i = 0; i < res.length; i++){
+            res[i] = Integer.max(prefixMax[start[queries[i]]-1], suffixMax[end[queries[i]] + 1]);
         }
         
         return res;
     }
     
-    void preOrder(TreeNode root, int h, int[] tree){
+    void dfs(TreeNode root, int depth){
         if(root == null) return;
-        tree[root.val] = maxHeight;
-        maxHeight = Integer.max(maxHeight, h);
-        preOrder(root.left, h + 1, tree);
-        preOrder(root.right, h + 1, tree);
-    }
-    
-    void preOrderMirror(TreeNode root, int h, int[] tree){
-        if(root == null) return;
-        tree[root.val] = maxHeight;
-        maxHeight = Integer.max(maxHeight, h);
-        preOrderMirror(root.right, h + 1, tree);
-        preOrderMirror(root.left, h + 1, tree);
+        start[root.val] = time;
+        tree[time++] = depth;
+        n++;
+        dfs(root.left, depth + 1);
+        dfs(root.right, depth + 1);
+        
+        end[root.val] = time;
+        tree[time++] = depth;
     }
 }
