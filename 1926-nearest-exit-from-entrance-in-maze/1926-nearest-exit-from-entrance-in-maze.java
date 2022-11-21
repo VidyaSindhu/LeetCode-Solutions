@@ -11,10 +11,6 @@ class Solution {
         
         while(!queue.isEmpty()){
             int[] top = queue.poll();
-            // for(int num: top){
-            //     System.out.print(num + "  ");
-            // }
-            // System.out.println("");
             int x = top[0];
             int y = top[1];
             int steps = top[2];            
