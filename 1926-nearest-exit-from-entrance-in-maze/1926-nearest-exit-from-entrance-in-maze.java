@@ -13,7 +13,7 @@ class Solution {
             int[] top = queue.poll();
             int x = top[0];
             int y = top[1];
-            int steps = top[2];            
+            int steps = top[2]+1;            
             
             for(int[] dir: dirs){
                 int newX = x + dir[0];
@@ -21,9 +21,9 @@ class Solution {
                 
                 if(newX < 0 || newY < 0 || newX >= m || newY >= n || maze[newX][newY] == '+') continue;
                 
-                if(newX == 0 || newY == 0 || newX == m-1 || newY == n-1) return steps+1;
+                if(newX == 0 || newY == 0 || newX == m-1 || newY == n-1) return steps;
                 
-                queue.offer(new int[]{newX, newY, steps+1});
+                queue.offer(new int[]{newX, newY, steps});
                 maze[newX][newY] = '+';
             }
         }
