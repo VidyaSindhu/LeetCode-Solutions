@@ -13,7 +13,7 @@ class Solution {
             int[] top = queue.poll();
             int x = top[0];
             int y = top[1];
-            int steps = top[2]+1;            
+            int steps = top[2] + 1;            
             
             for(int[] dir: dirs){
                 int newX = x + dir[0];
