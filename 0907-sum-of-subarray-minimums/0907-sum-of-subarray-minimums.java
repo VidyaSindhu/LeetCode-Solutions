@@ -1,33 +1,33 @@
 class Solution {
     public int sumSubarrayMins(int[] arr) {
-        int MOD = 1000000007;
-        Deque<Integer> leftStack = new ArrayDeque();
-        Deque<Integer> rightStack = new ArrayDeque();
-        
         int n = arr.length;
-        int[] left = new int[n];
-        int[] right = new int[n];
+        int MOD = 1_000_000_007;
+        Deque<Integer> stack = new ArrayDeque();
+        int[] fromLeft = new int[n];
+        int[] fromRight = new int[n];
         
-        for(int i = 0; i < n; i++){
-            while(!leftStack.isEmpty() && arr[leftStack.peek()] >= arr[i]){
-                leftStack.pop();
+        int right = 0;
+        while(right < n){
+            while(!stack.isEmpty() && arr[stack.peek()] >= arr[right]){
+                stack.pop();
             }
-            left[i] = leftStack.isEmpty() ? i + 1 : i - leftStack.peek();
-            leftStack.push(i);
+            fromLeft[right] = stack.isEmpty() ? right + 1: right - stack.peek();
+            stack.push(right);
+            right++;
         }
         
+        stack.clear();
         for(int i = n-1; i >= 0; i--){
-            while(!rightStack.isEmpty() && arr[rightStack.peek()] > arr[i]){
-                rightStack.pop();
+            while(!stack.isEmpty() && arr[stack.peek()] > arr[i]){
+                stack.pop();
             }
-            right[i] = rightStack.isEmpty() ? n - i : rightStack.peek() - i;
-            rightStack.push(i);
+            fromRight[i] = stack.isEmpty() ? n - i : stack.peek() - i;
+            stack.push(i);
         }
+        long ans = 0l;
         
-        long ans = 0L;
         for(int i = 0; i < n; i++){
-            // number of times arr[i] is minimum towards its left and right
-            ans += (long)left[i] * (long)right[i] * (long)arr[i];
+            ans += (long)arr[i] * (long)fromLeft[i] * (long)fromRight[i];
             ans %= MOD;
         }
         
