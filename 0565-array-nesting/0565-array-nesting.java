@@ -5,9 +5,16 @@ class Solution {
         int ans = 0;
         for(int i = 0; i < n; i++){
             if(nums[i] == -1) continue;
-            int tmp = nums[i];
-            nums[i] = -1;
-            ans = Integer.max(ans, dfs(nums, tmp, 0));
+            int steps = 0;
+            int tmp = i;
+            while(tmp != -1){
+                steps++;
+                int x = nums[tmp];
+                nums[tmp] = -1;
+                tmp = x;
+            }
+            
+            ans = Integer.max(ans, steps-1);
         }
         
         return ans;
