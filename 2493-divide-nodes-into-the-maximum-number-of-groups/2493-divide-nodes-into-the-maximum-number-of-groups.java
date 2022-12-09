@@ -14,7 +14,7 @@ class Solution {
         List<Integer>[] adj = new ArrayList[n];
         constructGraph(edges, adj);
         
-        Deque<int[]> queue = new ArrayDeque();
+        Deque<int[]> queue = new LinkedList();
         int[] distances = new int[n];
         Arrays.fill(distances, -1);
         
