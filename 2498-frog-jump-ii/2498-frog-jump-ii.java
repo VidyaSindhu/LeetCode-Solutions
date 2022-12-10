@@ -1,8 +1,9 @@
 class Solution {
+    boolean[] visited;
     public int maxJump(int[] stones) {
         int n = stones.length;
         int low = 0, high = stones[n-1] - stones[0];
-        
+        visited = new boolean[n];
         while(low <= high){
             int mid = low + (high - low)/2;
             if(isPossible(stones, mid)){
@@ -18,7 +19,7 @@ class Solution {
     
     boolean isPossible(int[] stones, int jump){
         int n = stones.length;
-        boolean[] visited = new boolean[n];
+        Arrays.fill(visited, false);
         
         int curr = 0;
 
