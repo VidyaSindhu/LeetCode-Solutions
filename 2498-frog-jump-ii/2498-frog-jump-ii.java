@@ -21,7 +21,7 @@ class Solution {
         boolean[] visited = new boolean[n];
         
         int curr = 0;
-        // System.out.println(jump);
+
         for(int i = 0; i < stones.length-1; i++){
             curr = i + 1;
             while(curr < stones.length && stones[curr] - stones[i] <= jump){
@@ -32,10 +32,7 @@ class Solution {
             visited[curr-1] = true;
             i = curr-2;
         }
-        // for(boolean b: visited){
-        //     System.out.print(b + " ");
-        // }
-        // System.out.println(" ");
+        
         int start = stones.length - 1;
         int prev = start;
         for(int i = stones.length-2; i >= 0;){
@@ -51,11 +48,6 @@ class Solution {
                 prev = i;
                 i--;
             }
-            // for(boolean b: visited){
-            //     System.out.print(b + " ");
-            // }
-            // System.out.println(" ");
-            
         }
         return true;
     }
