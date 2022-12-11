@@ -15,24 +15,28 @@ class Solution {
     int dfs(Map<Integer, List<Integer>> adj, int node, String s){
         if(adj.get(node) == null || adj.get(node).isEmpty()) return 0;
         
-        List<Integer> list = new ArrayList();
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b-a);
         for(int child: adj.get(node)){
             if(node != -1 && s.charAt(child) != s.charAt(node)){
-                list.add(1 + dfs(adj, child, s));
+                pq.offer(1 + dfs(adj, child, s));
             }
             else{
                 dfs(adj, child, s);
             }
         }
 
-        Collections.sort(list, (a, b) -> b-a);
-        int size = Integer.min(list.size(), 2);
+        
+        int size = Integer.min(pq.size(), 2);
         int len = 0;
-        int i = 0;
+        Integer first = 0;
         while(size --> 0){
-            len += list.get(i++);
+            if(first == 0){
+                first = pq.poll();
+                len += first;
+            }
+            else len += pq.poll();
         }
         ans = Integer.max(ans, len + 1);
-        return list.isEmpty() ? 0 : list.get(0);
+        return first;
     }
 }
