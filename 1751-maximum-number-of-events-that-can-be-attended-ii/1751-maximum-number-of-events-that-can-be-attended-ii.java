@@ -6,10 +6,9 @@ class Solution {
         int[][] dp = new int[n][k+1];
         
         int ans = 0;
-        for(int j = 1; j <= k; j++){
-            for(int i = 0; i < n; i++){
+        for(int i = 0; i < n; i++){
+            for(int j = 1; j <= k; j++){
                 int index = binarySearch(events, events[i][0]);
-                // System.out.println(index);
                 if (i - 1 >= 0) dp[i][j] = dp[i-1][j];
                 if(index != -1){
                     dp[i][j] = Integer.max(dp[i][j], dp[index][j-1] + events[i][2]);
