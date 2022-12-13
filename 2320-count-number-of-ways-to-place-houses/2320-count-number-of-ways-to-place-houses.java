@@ -1,11 +1,9 @@
 class Solution {
     int MOD = 1_000_000_007;
-    int[][] dp;
     public int countHousePlacements(int n) {
-        dp = new int[n+1][2];
         int prevHousePlaced = 0, prevHouseNotPlaced = 1;
+        int tmp1 = 0, tmp2 = 0;
         for(int i = 1; i <= n; i++){
-            int tmp1 = 0, tmp2 = 0;
             for(int j = 0; j <= 1; j++){
                 if(j == 0){
                     tmp1 = (prevHousePlaced % MOD + prevHouseNotPlaced % MOD) % MOD;
