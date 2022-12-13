@@ -3,18 +3,21 @@ class Solution {
     int[][] dp;
     public int countHousePlacements(int n) {
         dp = new int[n+1][2];
-        dp[0][0] = 1;
+        int prevHousePlaced = 0, prevHouseNotPlaced = 1;
         for(int i = 1; i <= n; i++){
+            int tmp1 = 0, tmp2 = 0;
             for(int j = 0; j <= 1; j++){
                 if(j == 0){
-                    dp[i][j] = ((dp[i-1][j^1] % MOD) + dp[i-1][j] % MOD) % MOD;
+                    tmp1 = (prevHousePlaced % MOD + prevHouseNotPlaced % MOD) % MOD;
                 }
                 else{
-                    dp[i][j] = dp[i-1][j^1];
+                    tmp2 = prevHouseNotPlaced;
                 }
             }
+            prevHousePlaced = tmp2;
+            prevHouseNotPlaced = tmp1;
         }
-        long ans = dp[n][0] + dp[n][1];
+        long ans = prevHousePlaced + prevHouseNotPlaced;
         return (int)(((ans % MOD) * (ans % MOD)) % MOD);
     }
     
