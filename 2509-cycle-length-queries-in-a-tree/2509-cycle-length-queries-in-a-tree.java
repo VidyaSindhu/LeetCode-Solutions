@@ -11,7 +11,6 @@ class Solution {
             }
             
             res[i] = p1.size() + p2.size() + 1;
-            if(res[i] == 15) System.out.println(queries[i][0] + " " + queries[i][1]);
         }
         return res;
     }
