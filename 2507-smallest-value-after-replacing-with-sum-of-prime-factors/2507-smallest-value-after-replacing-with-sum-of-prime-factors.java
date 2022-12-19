@@ -1,6 +1,6 @@
 class Solution {
     public int smallestValue(int n) {
-        boolean[] prime = new boolean[1000000];
+        boolean[] prime = new boolean[n+1];
         
         for(int i = 2; i < prime.length; i++){
             if(!prime[i]){
