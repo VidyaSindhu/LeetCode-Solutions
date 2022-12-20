@@ -6,9 +6,10 @@ class Solution {
     int quickSelect(int[] nums, int low, int high, int k){
         if(low >= high) return nums[low];
         
-        int pivotIndex = high;
+        int pivotIndex = new Random().nextInt(high-low) + low;
         int pivot = nums[pivotIndex];
         
+        swap(nums, pivotIndex, high);
         int leftPtr = low, rightPtr = high;
         while(leftPtr < rightPtr){
             while(nums[leftPtr] <= pivot && leftPtr < rightPtr){
