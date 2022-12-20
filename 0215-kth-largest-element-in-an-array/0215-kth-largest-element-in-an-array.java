@@ -1,19 +1,15 @@
 class Solution {
     public int findKthLargest(int[] nums, int k) {
-        return quickSelect(nums, k, 0, nums.length-1);
+        return quickSelect(nums, 0, nums.length-1, k);
     }
     
-    int quickSelect(int[] nums, int k, int low, int high){
+    int quickSelect(int[] nums, int low, int high, int k){
         if(low >= high) return nums[low];
         
-        // randomly choosing the pivot
-        int pivotIndex = new Random().nextInt(high-low) + low;
+        int pivotIndex = high;
         int pivot = nums[pivotIndex];
         
-        // swaping the pivot with the last index of the subarray
-        swap(nums, pivotIndex, high);
         int leftPtr = low, rightPtr = high;
-        
         while(leftPtr < rightPtr){
             while(nums[leftPtr] <= pivot && leftPtr < rightPtr){
                 leftPtr++;
@@ -21,16 +17,15 @@ class Solution {
             while(nums[rightPtr] >= pivot && leftPtr < rightPtr){
                 rightPtr--;
             }
-            
             swap(nums, leftPtr, rightPtr);
         }
         swap(nums, leftPtr, high);
         
-        if(nums.length - k == leftPtr) return nums[leftPtr];
+        int pos = nums.length - k;
+        if(pos == leftPtr) return nums[leftPtr];
         
-        if(nums.length - k < leftPtr) return quickSelect(nums, k, low, leftPtr-1);
-        
-        return quickSelect(nums, k, leftPtr+1, high);
+        if(pos > leftPtr) return quickSelect(nums, leftPtr + 1, high, k);
+        return quickSelect(nums, low, leftPtr - 1, k);
     }
     
     void swap(int[] nums, int i, int j){
