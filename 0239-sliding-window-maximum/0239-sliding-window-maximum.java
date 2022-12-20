@@ -7,7 +7,7 @@ class Solution {
         Deque<Integer> queue = new LinkedList();
         int left = 0, right = 0, i = 0;
         while(right < nums.length){
-            while(!queue.isEmpty() && right - left + 1 > k){
+            if(!queue.isEmpty() && right - left + 1 > k){
                 res[i++] = nums[queue.peekFirst()];
                 
                 if(nums[queue.peekFirst()] == nums[left]){
