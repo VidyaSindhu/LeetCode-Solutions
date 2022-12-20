@@ -163,20 +163,10 @@ class Solution
             }
             map.putIfAbsent(line, node.data);
         }
-        // dfs(root, map, 0);
+        
         for(int value: map.values()){
             res.add(value);
         }
         return res;
     }
-    
-    static void dfs(Node root, TreeMap<Integer, Integer> map, int line){
-        if(root == null) return;
-        
-        map.putIfAbsent(line, root.data);
-        dfs(root.left, map, line-1);
-        dfs(root.right, map, line+1);
-    }
-    
-    // static 
 }
