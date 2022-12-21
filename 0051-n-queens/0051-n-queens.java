@@ -12,7 +12,6 @@ class Solution {
     }
     
     void helper(int n, int row, List<String> list, Set<String> set){
-        // System.out.println(set);
         if(row >= n){
             res.add(new ArrayList(list));
             return;
