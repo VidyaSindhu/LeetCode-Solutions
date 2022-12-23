@@ -1,39 +1,45 @@
 class Solution {
-    int[] ans, count;
-    List<Set<Integer>> graph;
-    int N;
-    public int[] sumOfDistancesInTree(int N, int[][] edges) {
-        this.N = N;
-        graph = new ArrayList<Set<Integer>>();
-        ans = new int[N];
-        count = new int[N];
-        Arrays.fill(count, 1);
-
-        for (int i = 0; i < N; ++i)
-            graph.add(new HashSet<Integer>());
-        for (int[] edge: edges) {
-            graph.get(edge[0]).add(edge[1]);
-            graph.get(edge[1]).add(edge[0]);
+    public int[] sumOfDistancesInTree(int n, int[][] edges) {
+        List<Integer>[] adj = new ArrayList[n];
+        for(int i = 0; i < n; i++){
+            adj[i] = new ArrayList();
         }
-        dfs(0, -1);
-        dfs2(0, -1);
-        return ans;
+        
+        for(int[] edge: edges){
+            int u = edge[0];
+            int v = edge[1];
+            adj[u].add(v);
+            adj[v].add(u);
+        }
+        
+        int[] childs = new int[n];
+        int[] sumDis = new int[n];
+        dfs(adj, 0, -1, childs, 0, sumDis);
+        
+        // for(int num: childs) System.out.print(num + " ");
+        
+        for(int v : adj[0]){
+            calTotalDis(adj, v, 0, childs, sumDis);
+        }
+        
+        return sumDis;
+    }    
+    
+    void dfs(List<Integer>[] adj, int node, int parent, int[] childs, int depth, int[] sumDis){
+        sumDis[0] += depth;
+        for(int v: adj[node]){
+            if(parent == v) continue;
+            dfs(adj, v, node, childs, depth + 1, sumDis);
+            childs[node] += childs[v];
+        }
+        childs[node]++;
     }
-
-    public void dfs(int node, int parent) {
-        for (int child: graph.get(node))
-            if (child != parent) {
-                dfs(child, node);
-                count[node] += count[child];
-                ans[node] += ans[child] + count[child];
-            }
-    }
-
-    public void dfs2(int node, int parent) {
-        for (int child: graph.get(node))
-            if (child != parent) {
-                ans[child] = ans[node] - count[child] + N - count[child];
-                dfs2(child, node);
-            }
+    
+    void calTotalDis(List<Integer>[] adj, int node, int parent, int[] childs, int[] sumDis){
+        sumDis[node] = sumDis[parent] - childs[node] + (childs.length - childs[node]);
+        for(int v: adj[node]){
+            if(parent == v) continue;
+            calTotalDis(adj, v, node, childs, sumDis);
+        }
     }
 }
