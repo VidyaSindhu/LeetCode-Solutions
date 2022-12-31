@@ -5,7 +5,7 @@ class Solution {
         int m = grid.length;
         int n = grid[0].length;
         int zeroSquares = 0;
-        int start[] = new int[2], end[] = new int[2];
+        int start[] = new int[2];
         
         for(int i = 0; i < m; i++){
             for(int j = 0; j < n; j++){
@@ -13,22 +13,18 @@ class Solution {
                     start[0] = i;
                     start[1] = j;
                 }
-                else if(grid[i][j] == 2){
-                    end[0] = i;
-                    end[1] = j;
-                }
                 else if(grid[i][j] == 0) {
                     zeroSquares++;
                 }
             }
         }
         // System.out.println(zeroSquares);
-        dfs(grid, zeroSquares+1, start[0], start[1], end);
+        dfs(grid, zeroSquares+1, start[0], start[1]);
             
         return ans;
     }
     
-    void dfs(int[][] grid, int zeroSquares, int x, int y, int[] end){
+    void dfs(int[][] grid, int zeroSquares, int x, int y){
         if(grid[x][y] == 2){
             if(zeroSquares == 0) ans++;
             return;
@@ -42,7 +38,7 @@ class Solution {
             if(newX < 0 || newY < 0 || newX >= grid.length || newY >= grid[0].length 
               || grid[newX][newY] == -1) continue;
             
-            dfs(grid, zeroSquares-1, newX, newY, end);
+            dfs(grid, zeroSquares-1, newX, newY);
         }
         grid[x][y] = tmp;
     }
