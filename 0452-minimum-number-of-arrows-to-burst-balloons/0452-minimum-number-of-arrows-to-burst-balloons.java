@@ -6,7 +6,7 @@ class Solution {
             else return 0;
         });
         
-        int ans = 0;
+        int ans = 1;
         int x = points[0][0];
         int y = points[0][1];
         
@@ -19,6 +19,6 @@ class Solution {
             }
         }
         
-        return ans+1;
+        return ans;
     }
 }
